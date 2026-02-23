@@ -78,20 +78,17 @@ return {
 
             -- Obsidian specific live grep folders
             local vault_root = vim.fn.expand("~/Documents/Obsidian/Main")
+            local inbox = vault_root .. "/inbox"
+            local notes = vault_root .. "/notes"
+            local uncat = vault_root .. "/uncategorised"
 
             vim.keymap.set("n", "<Leader>fg", function()
-                require("fzf-lua").live_grep({
-                    cwd = vault_root,
-                    rg_opts = [[--column --line-number --no-heading --color=always --smart-case --max-columns=4096 --glob "inbox/**" --glob "notes/**" --glob "uncategorised/**" -e]],
-                })
+                Snacks.picker.grep({ dirs = { inbox, notes, uncat } })
             end, { desc = "Grep (Obsidian)", noremap = true })
 
             vim.keymap.set("n", "<Leader>ff", function()
-                require("fzf-lua").files({
-                    cwd = vault_root,
-                    cmd = [[fd --color=never --type f --hidden --follow --exclude .git . inbox notes uncategorised ]],
-                })
-            end, { desc = "Find files (Obsidian)", noremap = true })
+                Snacks.picker.files({ dirs = { inbox, notes, uncat } })
+            end, { desc = "Find Files (Obsidian)", noremap = true })
         end,
     },
 }
