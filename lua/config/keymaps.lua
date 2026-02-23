@@ -22,46 +22,43 @@ vim.keymap.set("n", "<C-Up>", "<C-k>", { noremap = false, silent = true })
 vim.keymap.set("n", "<C-Right>", "<C-l>", { noremap = false, silent = true })
 
 -- Remove
-vim.keymap.del("n", "gri")
-vim.keymap.del("n", "grr")
+for _, bind in ipairs({ "gri", "grr" }) do
+    pcall(vim.keymap.del, "n", bind)
+end
 
--- Fzf
-vim.keymap.set("n", "<Leader>fB", "<CMD>FzfLua buffers<CR>", { desc = "Buffers" })
+-- Snacks
+vim.keymap.set("n", "<Leader>n", function()
+    Snacks.picker.notifications()
+end, { desc = "Notification History" })
 vim.keymap.set("n", "<Leader>fc", function()
-    require("fzf-lua").files({ cwd = vim.fn.stdpath("config"), winopts = { title = " Config " } })
+    Snacks.picker.files({ cwd = vim.fn.stdpath("config") })
 end, { desc = "Config" })
-vim.keymap.set("n", "<Leader>ff", "<CMD>FzfLua files<CR>", { desc = "Find files" })
-vim.keymap.set("n", "<Leader>fd", "<CMD>FzfLua lsp_document_diagnostics<CR>", { desc = "Document diagnostics" })
-vim.keymap.set("n", "<Leader>fg", "<CMD>FzfLua live_grep<CR>", { desc = "Grep" })
-vim.keymap.set("x", "<Leader>fg", "<CMD>FzfLua grep_visual<CR>", { desc = "Grep" })
-vim.keymap.set("n", "<Leader>fh", "<CMD>FzfLua helptags<CR>", { desc = "Help" })
-vim.keymap.set("n", "<Leader>fo", "<CMD>FzfLua oldfiles<CR>", { desc = "Oldfiles" })
-vim.keymap.set("n", "<Leader>fu", "<CMD>FzfLua undotree<CR>", { desc = "Undotree" })
-vim.keymap.set("n", "<Leader>f<", "<CMD>FzfLua resume<CR>", { desc = "Resume fzf" })
-vim.keymap.set("n", "z=", "<CMD>FzfLua spell_suggest<CR>", { desc = "Spelling suggestions" })
-vim.keymap.set({ "n", "x" }, "<Leader>fb", function()
-    local opts = {
-        winopts = {
-            preview = { vertical = "down:70%" },
-            treesitter = {
-                enabled = false,
-                fzf_colors = { ["fg"] = { "fg", "CursorLine" }, ["bg"] = { "bg", "Normal" } },
-            },
-        },
-        fzf_opts = {
-            ["--layout"] = "reverse",
-        },
-    }
-    local mode = vim.api.nvim_get_mode().mode
-    if vim.startswith(mode, "n") then
-        require("fzf-lua").lgrep_curbuf(opts)
-    else
-        require("fzf-lua").blines(opts)
-    end
-end, { desc = "Search current buffer" })
-
+vim.keymap.set("n", "<Leader>ff", function()
+    Snacks.picker.files({ hidden = true })
+end, { desc = "Files" })
+vim.keymap.set("n", "<Leader>fi", function()
+    Snacks.picker.icons()
+end, { desc = "Icons" })
+vim.keymap.set("n", "<Leader>fh", function()
+    Snacks.picker.help()
+end, { desc = "Help" })
+vim.keymap.set("n", "<Leader>fd", function()
+    Snacks.picker.diagnostics_buffer()
+end, { desc = "Diagnostics (Buffer)" })
+vim.keymap.set("n", "<Leader>fD", function()
+    Snacks.picker.diagnostics()
+end, { desc = "Diagnostics" })
+vim.keymap.set("n", "<Leader>fg", function()
+    Snacks.picker.grep()
+end, { desc = "Diagnostics" })
+vim.keymap.set("n", "<Leader>fu", function()
+    Snacks.picker.undo()
+end, { desc = "Undotree" })
+vim.keymap.set("n", "<Leader>fb", function()
+    Snacks.picker.lines()
+end, { desc = "Grep Buffer" })
 vim.keymap.set("n", "<Leader>ft", function()
-    require("todo-comments.fzf").todo()
+    Snacks.picker.todo_comments()
 end, { desc = "Todo" })
 
 -- Conform

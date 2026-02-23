@@ -16,16 +16,10 @@ return {
                 },
             },
             picker = {
-                enabled = false,
-            },
-        },
-        keys = {
-            {
-                "<leader>k",
-                function()
-                    Snacks.image.hover()
-                end,
-                desc = "Image Hover",
+                enabled = true,
+                matcher = {
+                    frecency = true,
+                },
             },
         },
     },

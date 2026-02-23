@@ -4,7 +4,7 @@ return {
         event = "VeryLazy",
         opts = {
             preset = "helix",
-            delay = 1,
+            delay = 200,
             icons = {
                 keys = {
                     BS = "󰭜 ", -- Better backspace icon + fix space issue I had
@@ -12,7 +12,7 @@ return {
             },
             plugins = {
                 spelling = {
-                    enabled = false,
+                    enabled = true,
                 },
             },
         },
