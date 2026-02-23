@@ -12,7 +12,6 @@ return {
                 },
                 integrations = {
                     fidget = true,
-                    fzf = true,
                     diffview = true,
                     mason = true,
                     snacks = {
