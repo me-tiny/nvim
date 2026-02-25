@@ -29,19 +29,6 @@ local function is_library(fname)
     end
 end
 
--- extend capabilities
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-
-capabilities.experimental = capabilities.experimental or {}
-capabilities.experimental.serverStatusNotification = true
-capabilities.experimental.commands = {
-    commands = {
-        "rust-analyzer.showReferences",
-        "rust-analyzer.runSingle",
-        "rust-analyzer.debugSingle",
-    },
-}
-
 ---@type vim.lsp.Config
 return {
     cmd = { "rust-analyzer" },
@@ -94,7 +81,18 @@ return {
             end
         end)
     end,
-    capabilities = capabilities,
+    capabilities = {
+        experimental = {
+            serverStatusNotification = true,
+            commands = {
+                commands = {
+                    "rust-analyzer.showReferences",
+                    "rust-analyzer.runSingle",
+                    "rust-analyzer.debugSingle",
+                },
+            },
+        },
+    },
     settings = {
         ["rust-analyzer"] = {
             cargo = {

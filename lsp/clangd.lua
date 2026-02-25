@@ -2,6 +2,7 @@
 return {
     cmd = {
         "clangd",
+        "-j=" .. vim.uv.available_parallelism(), -- cpu cores
         "--background-index",
         "--clang-tidy",
         "--header-insertion=iwyu",
