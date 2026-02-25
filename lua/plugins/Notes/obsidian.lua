@@ -83,11 +83,11 @@ return {
             local uncat = vault_root .. "/uncategorised"
 
             vim.keymap.set("n", "<Leader>fg", function()
-                Snacks.picker.grep({ dirs = { inbox, notes, uncat } })
+                Snacks.picker.grep({ dirs = { inbox, notes, uncat }, title = "Vault (Grep)" })
             end, { desc = "Grep (Obsidian)", noremap = true })
 
             vim.keymap.set("n", "<Leader>ff", function()
-                Snacks.picker.files({ dirs = { inbox, notes, uncat } })
+                Snacks.picker.files({ dirs = { inbox, notes, uncat }, title = "Vault" })
             end, { desc = "Find Files (Obsidian)", noremap = true })
         end,
     },
