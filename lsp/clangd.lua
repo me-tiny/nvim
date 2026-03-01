@@ -17,12 +17,14 @@ return {
     init_options = {
         fallbackFlags = {
             "--std=c++23",
+            "-pedantic-errors",
             "-Wall",
             "-Weffc++",
             "-Wextra",
             "-Wconversion",
             "-Wsign-conversion",
             "-Werror",
+            "-Wshadow",
         },
     },
     on_attach = function()
