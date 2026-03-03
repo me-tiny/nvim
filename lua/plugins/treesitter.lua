@@ -37,6 +37,7 @@ return {
                 "comment",
                 "css",
                 "diff",
+                "gdscript",
                 "git_config",
                 "git_rebase",
                 "gitcommit",
