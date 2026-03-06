@@ -35,6 +35,7 @@ return {
                 "bash",
                 "c",
                 "comment",
+                "cpp",
                 "css",
                 "diff",
                 "gdscript",
@@ -66,11 +67,11 @@ return {
                 "xml",
             }, { max_jobs = 8 })
 
-            local ts_group = vim.api.nvim_create_augroup("treesitter-setup", { clear = true })
-            local ignore_ft = {
-                "checkhealth",
-                "lazy",
-            }
+            -- local ts_group = vim.api.nvim_create_augroup("treesitter-setup", { clear = true })
+            -- local ignore_ft = {
+            --     "checkhealth",
+            --     "lazy",
+            -- }
 
             -- TODO: spams warning messages, find better way
             -- https://github.com/nvim-treesitter/nvim-treesitter/commit/1927c76aec829d40dcad24b6469cb639f1334096
