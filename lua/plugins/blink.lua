@@ -1,7 +1,7 @@
 return {
     {
         "saghen/blink.cmp",
-        event = "InsertEnter",
+        event = "VeryLazy",
         build = "cargo +nightly build --release",
         opts = {
             snippets = {
