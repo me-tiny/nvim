@@ -71,3 +71,11 @@ end, "Todo")
 map("<Leader>fm", function()
     require("conform").format({ async = true, lsp_format = "fallback" })
 end, "Format Buffer", "")
+
+-- clangd
+vim.keymap.set(
+    "n",
+    "<Leader>ch",
+    "<CMD>LspClangdSwitchSourceHeader<CR>",
+    { desc = "Switch source/header (C/C++)", silent = true }
+)
