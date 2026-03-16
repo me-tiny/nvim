@@ -71,7 +71,7 @@ vim.o.complete = ""
 vim.o.confirm = true
 
 -- Color column
--- vim.o.colorcolumn = "80"
+vim.o.colorcolumn = "80"
 
 -- Change tab sizing
 vim.o.tabstop = 4
