@@ -20,9 +20,9 @@ autocmd("BufEnter", {
 autocmd("FileType", {
     pattern = { "markdown", "gitcommit", "text" },
     callback = function()
-        vim.opt.wrap = true
-        vim.opt.spell = true
-        vim.opt.textwidth = 80
+        vim.o.wrap = true
+        vim.o.spell = true
+        vim.o.textwidth = 80
     end,
     group = augroup("spellcheck-for-md", { clear = true }),
     desc = "Spellcheck for Markdown files",
