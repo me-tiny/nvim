@@ -44,7 +44,18 @@ vim.diagnostic.config({
     update_in_insert = true,
     severity_sort = true,
     float = { border = "rounded", source = "if_many" },
-    jump = { float = true },
+    jump = {
+        on_jump = function(diagnostic, bufnr)
+            if not diagnostic then
+                return
+            end
+            vim.diagnostic.open_float({
+                bufnr = bufnr,
+                scope = "cursor",
+                focus = false,
+            })
+        end,
+    },
     signs = {
         -- gets rid of signs in gutter
         text = {
