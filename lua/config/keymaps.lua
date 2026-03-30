@@ -4,24 +4,19 @@ local function map(keys, func, opts, mode)
     vim.keymap.set(mode, keys, func, opts)
 end
 
--- Remove default bindings (for Snacks rebinding)
 for _, bind in ipairs({ "gri", "grr", "grt", "gO" }) do
     pcall(vim.keymap.del, "n", bind)
 end
 
--- Clear highlights
 map("<Esc>", "<Cmd>nohl<CR>")
 
--- Diagnostic keymaps
 map("<Leader>q", vim.diagnostic.setqflist, "Quickfix List")
 
--- Rebinds arrowkeys to use hjkl while using Glove80
 map("<Left>", "h", { noremap = true, silent = true })
 map("<Down>", "j", { noremap = true, silent = true })
 map("<Up>", "k", { noremap = true, silent = true })
 map("<Right>", "l", { noremap = true, silent = true })
 
--- Split navigation
 map("<C-h>", "<C-w><C-h>", "Move focus to the left window")
 map("<C-j>", "<C-w><C-j>", "Move focus to the lower window")
 map("<C-k>", "<C-w><C-k>", "Move focus to the upper window")
@@ -32,7 +27,6 @@ map("n", "<C-Down>", "<C-j>", { noremap = false, silent = true })
 map("n", "<C-Up>", "<C-k>", { noremap = false, silent = true })
 map("n", "<C-Right>", "<C-l>", { noremap = false, silent = true })
 
--- Snacks
 map("<Leader>n", function()
     Snacks.picker.notifications()
 end, "Notification History")
@@ -67,7 +61,6 @@ map("<Leader>ft", function()
     Snacks.picker.todo_comments()
 end, "Todo")
 
--- Conform
 map("<Leader>fm", function()
     require("conform").format({ async = true, lsp_format = "fallback" })
 end, "Format Buffer", "")
