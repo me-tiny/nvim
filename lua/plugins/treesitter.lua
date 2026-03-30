@@ -55,6 +55,8 @@ return {
                 "python",
                 "query",
                 "regex",
+                "r",
+                "rnoweb",
                 "rust",
                 "scss",
                 "svelte",

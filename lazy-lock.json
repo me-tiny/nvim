@@ -1,5 +1,6 @@
 {
   "LuaSnip": { "branch": "master", "commit": "642b0c595e11608b4c18219e93b88d7637af27bc" },
+  "R.nvim": { "branch": "main", "commit": "c37d1cfd46fe0c5ab7e5384154adf985c537cbcc" },
   "blink.cmp": { "branch": "main", "commit": "8a2060dff4e68ac17f1c92aed526c76fb0c1ac2f" },
   "catppuccin": { "branch": "main", "commit": "a7788416689dbefea659d9e9415c87926b0ba5d8" },
   "conform.nvim": { "branch": "master", "commit": "086a40dc7ed8242c03be9f47fbcee68699cc2395" },
