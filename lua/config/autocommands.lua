@@ -18,14 +18,16 @@ autocmd("BufEnter", {
 })
 
 autocmd("FileType", {
-    pattern = { "markdown", "gitcommit", "text" },
+    pattern = { "markdown", "gitcommit", "text", "typst" },
     callback = function()
-        vim.o.wrap = true
+        if vim.bo.filetype ~= "typst" then
+            vim.o.textwidth = 80
+            vim.o.wrap = true
+        end
         vim.o.spell = true
-        vim.o.textwidth = 80
     end,
-    group = augroup("spellcheck-for-md", { clear = true }),
-    desc = "Spellcheck for Markdown files",
+    group = augroup("spellcheck-for-text", { clear = true }),
+    desc = "Spellcheck for text files",
 })
 
 autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
