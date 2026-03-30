@@ -8,7 +8,7 @@ return {
                     vim.api.nvim_buf_set_keymap(0, "n", "<Enter>", "<Plug>RDSendLine", {})
                     vim.api.nvim_buf_set_keymap(0, "v", "<Enter>", "<Plug>RDSendSelection", {})
                     require("which-key").add({
-                        { "<Leader>r", group = "R", icon = "" },
+                        { "<Leader>r", group = "R", icon = "󰟔" },
                     })
                 end,
             },
