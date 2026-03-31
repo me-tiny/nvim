@@ -28,6 +28,12 @@ return {
                         information = { "undercurl" },
                     },
                 },
+                custom_highlights = function()
+                    return {
+                        ["@comment.todo"] = { link = "Comment" },
+                        ["Todo"] = { link = "Comment" },
+                    }
+                end,
             })
             vim.cmd.colorscheme("catppuccin")
         end,
