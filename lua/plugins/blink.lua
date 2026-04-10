@@ -43,7 +43,10 @@ return {
                 },
             },
             signature = {
-                enabled = false,
+                enabled = true,
+                window = {
+                    show_documentation = false,
+                },
             },
             sources = {
                 default = { "lazydev", "lsp", "path", "snippets", "buffer" },

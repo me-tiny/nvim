@@ -23,6 +23,9 @@ local function on_attach(client, bufnr)
     map("gO", Snacks.picker.lsp_symbols, "Document Symbols")
     map("gW", Snacks.picker.lsp_workspace_symbols, "Workspace Symbols")
     map("grt", Snacks.picker.lsp_type_definitions, "Type Definitions")
+    map("grn", vim.lsp.buf.rename, "Rename")
+    map("gra", vim.lsp.buf.code_action, "Code Action")
+    map("grx", vim.lsp.codelens.run, "Codelens Run")
 
     if client:supports_method("textDocument/documentHighlight") then
         local highlight_augroup = vim.api.nvim_create_augroup("lsp-highlight-" .. bufnr, { clear = true })

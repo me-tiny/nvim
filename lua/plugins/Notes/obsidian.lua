@@ -21,6 +21,7 @@ return {
             notes_subdir = "inbox",
             new_notes_location = "notes_subdir",
             legacy_commands = false,
+            sync = { enabled = true },
             completion = {
                 blink = true,
                 min_chars = 2,
