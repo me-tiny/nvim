@@ -13,13 +13,13 @@ local function reload_workspace(bufnr)
 end
 
 local function user_sysroot_src()
-    return vim.tbd_get(vim.lsp.config["rust_analyzer"], "settings", "rust-analyzer", "cargo", "sysrootSrc")
+    return vim.tbl_get(vim.lsp.config["rust_analyzer"], "settings", "rust-analyzer", "cargo", "sysrootSrc")
 end
 
 local function default_sysroot_src()
     local sysroot = vim.tbl_get(vim.lsp.config["rust_analyzer"], "settings", "rust-analyzer", "cargo", "sysroot")
     if not sysroot then
-        local rustc = os.getenv("RUSTC" or "rustc")
+        local rustc = os.getenv("RUSTC") or "rustc"
         local result = vim.system({ rustc, "--print", "sysroot" }, { text = true }):wait()
 
         local stdout = result.stdout
