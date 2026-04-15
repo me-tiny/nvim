@@ -72,3 +72,11 @@ vim.keymap.set(
     "<CMD>LspClangdSwitchSourceHeader<CR>",
     { desc = "Switch source/header (C/C++)", silent = true }
 )
+
+-- lsp
+map("[e", function()
+    vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR })
+end, "Previous Error")
+map("]e", function()
+    vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR })
+end, "Next Error")
