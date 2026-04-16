@@ -43,7 +43,7 @@ vim.o.winborder = "none"
 vim.diagnostic.config({
     update_in_insert = false,
     severity_sort = true,
-    float = { border = "rounded", source = "if_many" },
+    float = { border = "none", source = "if_many" },
     jump = {
         on_jump = function(diagnostic, bufnr)
             if not diagnostic then

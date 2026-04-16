@@ -8,6 +8,7 @@ return {
                 opts = {
                     max_lines = 4,
                     multiline_threshold = 2,
+                    min_window_height = 20,
                 },
                 keys = {
                     {
