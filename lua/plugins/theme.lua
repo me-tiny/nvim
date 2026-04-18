@@ -1,24 +1,49 @@
 return {
     {
-        "webhooked/kanso.nvim",
+        "rose-pine/neovim",
         lazy = false,
         priority = 1000,
+        name = "rose-pine",
         config = function()
-            require("kanso").setup({
-                background = {
-                    dark = "zen",
+            require("rose-pine").setup({
+                variant = "main",
+                extend_background_behind_borders = false,
+                highlight_groups = {
+                    WhichKeyBorder = { link = "FloatBorder" },
                 },
-                foreground = "default",
-                overrides = function(colors)
-                    return {
-                        ["@comment.todo"] = { link = "Comment" },
-                        ["Todo"] = { link = "Comment" },
-                    }
+                before_highlight = function(group, highlight, palette)
+                    if group == "FloatBorder" then
+                        highlight.fg = palette.surface
+                        highlight.bg = palette.surface
+                    end
+                    if group == "NormalFloat" then
+                        highlight.bg = palette.surface
+                    end
                 end,
             })
-            vim.cmd.colorscheme("kanso")
+            vim.cmd.colorscheme("rose-pine")
         end,
     },
+    -- {
+    --     "webhooked/kanso.nvim",
+    --     lazy = false,
+    --     priority = 1000,
+    --     config = function()
+    --         require("kanso").setup({
+    --             background = {
+    --                 dark = "zen",
+    --             },
+    --             foreground = "default",
+    --             overrides = function(colors)
+    --                 return {
+    --                     ["@comment.todo"] = { link = "Comment" },
+    --                     ["Todo"] = { link = "Comment" },
+    --                 }
+    --             end,
+    --         })
+    --         vim.cmd.colorscheme("kanso")
+    --     end,
+    -- },
     -- {
     --     "oskarnurm/koda.nvim",
     --     lazy = false,
