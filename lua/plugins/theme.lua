@@ -13,11 +13,11 @@ return {
                 },
                 before_highlight = function(group, highlight, palette)
                     if group == "FloatBorder" then
-                        highlight.fg = palette.surface
-                        highlight.bg = palette.surface
+                        highlight.fg = palette.base
+                        highlight.bg = palette.base
                     end
                     if group == "NormalFloat" then
-                        highlight.bg = palette.surface
+                        highlight.bg = palette.base
                     end
                 end,
             })
