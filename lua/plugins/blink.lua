@@ -16,7 +16,7 @@ return {
                 enabled = false,
             },
             completion = {
-                list = { selection = { preselect = true, auto_insert = false } },
+                list = { selection = { preselect = false, auto_insert = false } },
                 menu = {
                     auto_show_delay_ms = 1,
                     min_width = 15,
