@@ -10,6 +10,10 @@ return {
                 extend_background_behind_borders = false,
                 highlight_groups = {
                     WhichKeyBorder = { link = "FloatBorder" },
+                    ["@markup.raw.markdown_inline"] = { fg = "gold", bg = "overlay" },
+                    RenderMarkdownCodeInline = { link = "@markup.raw.markdown_inline" },
+                    ["@markup.strong"] = { fg = "gold" },
+                    ["@markup.italic"] = { fg = "gold" },
                 },
                 before_highlight = function(group, highlight, palette)
                     if group == "FloatBorder" then
