@@ -50,6 +50,14 @@ local function on_attach(client, bufnr)
         })
     end
 
+    if client:supports_method("textDocument/documentColor") then
+        vim.lsp.document_color.enable(true, { bufnr = bufnr })
+    end
+
+    if client:supports_method("textDocument/linkedEditingRange") then
+        vim.lsp.linked_editing_range.enable(true, { bufnr = bufnr })
+    end
+
     if client:supports_method("textDocument/codeLens") then
         local group = vim.api.nvim_create_augroup(("lsp-codelens-%d-%d"):format(client.id, bufnr), { clear = true })
 
