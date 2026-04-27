@@ -16,7 +16,7 @@ return {
                 enabled = false,
             },
             completion = {
-                list = { selection = { preselect = false, auto_insert = false } },
+                list = { selection = { preselect = true, auto_insert = false } },
                 menu = {
                     auto_show_delay_ms = 1,
                     min_width = 15,
@@ -60,16 +60,27 @@ return {
                         name = "LazyDev",
                         module = "lazydev.integrations.blink",
                         score_offset = 100,
+                        fallbacks = { "lsp" },
                     },
                     snippets = {
-                        min_keyword_length = 2,
+                        min_keyword_length = function(ctx)
+                            if ctx.trigger.initial_kind == "trigger_character" then
+                                return 0
+                            end
+                            return 2
+                        end,
+                        override = {
+                            get_trigger_characters = function(_)
+                                return { "#", "/" }
+                            end,
+                        },
+                        opts = {
+                            prefer_doc_trig = true,
+                        },
                     },
                     buffer = {
                         max_items = 5,
                     },
-                    -- path = {
-                    --     opts = { get_cwd = vim.uv.cwd, show_hidden_files_by_default = true },
-                    -- },
                 },
             },
             keymap = {
@@ -88,7 +99,6 @@ return {
                 implementation = "rust",
             },
             appearance = {
-                use_nvim_cmp_as_default = false,
                 nerd_font_variant = "mono",
                 kind_icons = {
                     Array = "󰅪",

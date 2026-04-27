@@ -54,7 +54,7 @@ return {
         "--clang-tidy",
         "--header-insertion=iwyu",
         "--completion-style=detailed",
-        "--function-arg-placeholders=false",
+        "--function-arg-placeholders=0",
         "--fallback-style={BasedOnStyle: LLVM, AllowShortFunctionsOnASingleLine: None}",
     },
     filetypes = {

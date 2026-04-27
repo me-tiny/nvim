@@ -54,10 +54,11 @@ autocmd({ "VimResized" }, {
 autocmd("VimEnter", {
     callback = function()
         vim.defer_fn(function()
-            -- Extending filetypes
-            require("luasnip").filetype_extend("python", { "pydoc" })
-            require("luasnip").filetype_extend("lua", { "luadoc" })
-            -- Loading
+            local ls = require("luasnip")
+            ls.filetype_extend("python", { "pydoc" })
+            ls.filetype_extend("lua", { "luadoc" })
+            ls.filetype_extend("rust", { "rustdoc" })
+            ls.filetype_extend("cpp", { "cppdoc" })
             require("luasnip.loaders.from_vscode").lazy_load({
                 paths = {
                     vim.fn.stdpath("data") .. "/lazy/friendly-snippets",
