@@ -59,6 +59,7 @@ autocmd("VimEnter", {
             ls.filetype_extend("lua", { "luadoc" })
             ls.filetype_extend("rust", { "rustdoc" })
             ls.filetype_extend("cpp", { "cppdoc" })
+            ls.filetype_extend("c", { "cdoc" })
             require("luasnip.loaders.from_vscode").lazy_load({
                 paths = {
                     vim.fn.stdpath("data") .. "/lazy/friendly-snippets",

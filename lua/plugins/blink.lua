@@ -74,6 +74,27 @@ return {
                                 return { "#", "/" }
                             end,
                         },
+                        should_show_items = function(ctx)
+                            if ctx.trigger.initial_kind ~= "trigger_character" then
+                                return true
+                            end
+                            local col = ctx.cursor[2]
+                            local before = ctx.line:sub(1, col)
+                            return before:match("^%s*[/#]+$") ~= nil
+                        end,
+                        -- TODO: maybe be treesitter aware, fallback to old one
+                        --       if not ok
+                        -- should_show_items = function(ctx)
+                        --     if ctx.trigger.initial_kind ~= "trigger_character" then
+                        --         return true
+                        --     end
+                        --     local ok, node = pcall(vim.treesitter.get_node)
+                        --     if not ok or not node then
+                        --         return false
+                        --     end
+                        --     local t = node:type()
+                        --     return t:find("comment") ~= nil or t:find("doc") ~= nil
+                        -- end,
                         opts = {
                             prefer_doc_trig = true,
                         },
