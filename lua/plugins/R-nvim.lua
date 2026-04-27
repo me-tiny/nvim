@@ -5,8 +5,8 @@ return {
         opts = {
             hook = {
                 on_filetype = function()
-                    vim.api.nvim_buf_set_keymap(0, "n", "<Enter>", "<Plug>RDSendLine", {})
-                    vim.api.nvim_buf_set_keymap(0, "v", "<Enter>", "<Plug>RDSendSelection", {})
+                    vim.keymap.set("n", "<Enter>", "<Plug>RDSendLine", { buffer = 0 })
+                    vim.keymap.set("v", "<Enter>", "<Plug>RDSendSelection", { buffer = 0 })
                     require("which-key").add({
                         { "<Leader>r", group = "R", icon = "󰟔" },
                     })
