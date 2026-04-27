@@ -85,6 +85,13 @@ local function on_attach(client, bufnr)
             vim.lsp.inlay_hint.enable(vim.g.inlay_hints and (mode == "n" or mode == "v"), { bufnr = bufnr })
         end, "Toggle Inlay Hints")
     end
+
+    if client:supports_method("textDocument/foldingRange") then
+        local win = vim.api.nvim_get_current_win()
+        vim.wo[win][0].foldmethod = "expr"
+        vim.wo[win][0].foldexpr = "v:lua.vim.lsp.foldexpr()"
+        vim.wo[win][0].foldtext = "v:lua.vim.lsp.foldtext()"
+    end
 end
 
 vim.api.nvim_create_autocmd("LspAttach", {
