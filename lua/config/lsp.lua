@@ -1,4 +1,5 @@
 vim.g.inlay_hints = false
+vim.g.codelens = false
 
 vim.lsp.config("*", {
     capabilities = {
@@ -47,6 +48,26 @@ local function on_attach(client, bufnr)
             callback = vim.lsp.buf.clear_references,
             desc = "LSP: Clear highlight references",
         })
+    end
+
+    if client:supports_method("textDocument/codeLens") then
+        local group = vim.api.nvim_create_augroup(("lsp-codelens-%d-%d"):format(client.id, bufnr), { clear = true })
+
+        vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave", "CursorHold" }, {
+            buf = bufnr,
+            group = group,
+            callback = function()
+                if vim.g.codelens then
+                    vim.lsp.codelens.enable(vim.g.codelens, { bufnr = bufnr })
+                end
+            end,
+        })
+
+        map("<Leader>tc", function()
+            local mode = vim.api.nvim_get_mode().mode
+            vim.g.codelens = not vim.g.codelens
+            vim.lsp.codelens.enable(vim.g.codelens and (mode == "n" or mode == "v"), { bufnr = bufnr })
+        end, "Toggle Codelens")
     end
 
     if client:supports_method("textDocument/inlayHint") then
