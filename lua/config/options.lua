@@ -38,6 +38,7 @@ vim.o.spelllang = "en"
 vim.o.smoothscroll = true
 vim.o.conceallevel = 2
 vim.o.winborder = "none"
+vim.o.foldlevelstart = 99
 
 -- diagnostic setup
 vim.diagnostic.config({
@@ -57,14 +58,12 @@ vim.diagnostic.config({
         end,
     },
     signs = {
-        -- gets rid of signs in gutter
         text = {
             [vim.diagnostic.severity.ERROR] = "",
             [vim.diagnostic.severity.WARN] = "",
             [vim.diagnostic.severity.INFO] = "",
             [vim.diagnostic.severity.HINT] = "",
         },
-        -- but can color line num
         numhl = {
             [vim.diagnostic.severity.ERROR] = "ErrorMsg",
             [vim.diagnostic.severity.WARN] = "WarningMsg",

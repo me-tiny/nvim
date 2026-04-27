@@ -1,19 +1,23 @@
-local M = {}
-
 vim.g.inlay_hints = false
 
-local function on_attach(client, bufnr)
-    -- guard
-    if vim.b[bufnr].did_lsp_attach then
-        return
-    end
-    vim.b[bufnr].did_lsp_attach = true
+vim.lsp.config("*", {
+    capabilities = {
+        textDocument = {
+            semanticTokens = { multilineTokenSupport = true },
+        },
+    },
+})
 
-    local function map(keys, func, opts, mode)
-        mode = mode or "n"
-        opts = type(opts) == "string" and { desc = opts } or opts
-        opts.buffer = bufnr
-        vim.keymap.set(mode, keys, func, opts)
+local servers = vim.iter(vim.api.nvim_get_runtime_file("lsp/*.lua", true))
+    :map(function(file)
+        return vim.fn.fnamemodify(file, ":t:r")
+    end)
+    :totable()
+vim.lsp.enable(servers)
+
+local function on_attach(client, bufnr)
+    local function map(keys, func, desc, mode)
+        vim.keymap.set(mode or "n", keys, func, { buffer = bufnr, desc = desc })
     end
 
     map("grr", Snacks.picker.lsp_references, "References")
@@ -28,23 +32,25 @@ local function on_attach(client, bufnr)
     map("grx", vim.lsp.codelens.run, "Codelens Run")
 
     if client:supports_method("textDocument/documentHighlight") then
-        local highlight_augroup = vim.api.nvim_create_augroup("lsp-highlight-" .. bufnr, { clear = true })
+        local group = vim.api.nvim_create_augroup(("lsp-highlight-%d-%d"):format(client.id, bufnr), { clear = true })
+
         vim.api.nvim_create_autocmd({ "CursorHold", "InsertLeave" }, {
-            buffer = bufnr,
-            group = highlight_augroup,
+            buf = bufnr,
+            group = group,
             callback = vim.lsp.buf.document_highlight,
-            desc = "Highlight references under cursor",
+            desc = "LSP: Highlight references under cursor",
         })
+
         vim.api.nvim_create_autocmd({ "CursorMoved", "InsertEnter", "BufLeave" }, {
-            buffer = bufnr,
-            group = highlight_augroup,
+            buf = bufnr,
+            group = group,
             callback = vim.lsp.buf.clear_references,
-            desc = "Clear highlight references",
+            desc = "LSP: Clear highlight references",
         })
     end
 
     if client:supports_method("textDocument/inlayHint") then
-        local inlay_hints_group = vim.api.nvim_create_augroup("inlay-hints-" .. bufnr, { clear = true })
+        local group = vim.api.nvim_create_augroup(("inlay-hints-%d-%d"):format(client.id, bufnr), { clear = true })
 
         if vim.g.inlay_hints then
             vim.defer_fn(function()
@@ -54,25 +60,23 @@ local function on_attach(client, bufnr)
         end
 
         vim.api.nvim_create_autocmd("InsertEnter", {
-            buffer = bufnr,
-            group = inlay_hints_group,
+            buf = bufnr,
+            group = group,
             callback = function()
                 if vim.g.inlay_hints then
                     vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
                 end
             end,
-            desc = "Disable inlay hints on InsertEnter",
         })
 
         vim.api.nvim_create_autocmd("InsertLeave", {
-            buffer = bufnr,
-            group = inlay_hints_group,
+            buf = bufnr,
+            group = group,
             callback = function()
                 if vim.g.inlay_hints then
                     vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
                 end
             end,
-            desc = "Enable inlay hints on InsertLeave",
         })
 
         map("<Leader>th", function()
@@ -81,16 +85,6 @@ local function on_attach(client, bufnr)
             vim.lsp.inlay_hint.enable(vim.g.inlay_hints and (mode == "n" or mode == "v"), { bufnr = bufnr })
         end, "Toggle Inlay Hints")
     end
-end
-
-local register_capability = vim.lsp.handlers["client/registerCapability"]
-vim.lsp.handlers["client/registerCapability"] = function(err, res, ctx)
-    local client = vim.lsp.get_client_by_id(ctx.client_id)
-    if not client then
-        return
-    end
-    on_attach(client, vim.api.nvim_get_current_buf())
-    return register_capability(err, res, ctx)
 end
 
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -102,21 +96,19 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
         on_attach(client, args.buf)
     end,
-    desc = "Configure LSP keymaps",
+    desc = "Configure LSP per client",
 })
 
-vim.api.nvim_create_autocmd({ "BufReadPre", "BufNewFile" }, {
-    once = true,
-    callback = function()
-        vim.lsp.config("*", { capabilities = { textDocument = { semanticTokens = { multilineTokenSupport = true } } } })
-        local servers = vim.iter(vim.api.nvim_get_runtime_file("lsp/*.lua", true))
-            :map(function(file)
-                return vim.fn.fnamemodify(file, ":t:r")
-            end)
-            :totable()
-        vim.lsp.enable(servers)
-    end,
-    desc = "Set up LSP servers",
-})
-
-return M
+-- NOTE: dynamic lsp capability reg, not sure if i even need it, from :h LspAttach
+-- vim.lsp.handlers["client/registerCapability"] = (function(overridden)
+--     return function(err, res, ctx)
+--         local result = overridden(err, res, ctx)
+--         local client = vim.lsp.get_client_by_id(ctx.client_id)
+--         if client then
+--             for bufnr in pairs(client.attached_buffers) do
+--                 on_attach(client, bufnr)
+--             end
+--         end
+--         return result
+--     end
+-- end)(vim.lsp.handlers["client/registerCapability"])
