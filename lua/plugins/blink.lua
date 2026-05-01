@@ -95,9 +95,6 @@ return {
                         --     local t = node:type()
                         --     return t:find("comment") ~= nil or t:find("doc") ~= nil
                         -- end,
-                        opts = {
-                            prefer_doc_trig = true,
-                        },
                     },
                     buffer = {
                         max_items = 5,
