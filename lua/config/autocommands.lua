@@ -9,9 +9,9 @@ autocmd("TextYankPost", {
     desc = "Highlight when yanking text",
 })
 
-autocmd("BufEnter", {
+autocmd("FileType", {
     callback = function()
-        vim.opt.formatoptions:remove({ "c", "r", "o" })
+        vim.opt_local.formatoptions:remove({ "c", "r", "o" })
     end,
     group = augroup("disable-comment-new-line", { clear = true }),
     desc = "Disable new line comment",
@@ -21,10 +21,10 @@ autocmd("FileType", {
     pattern = { "markdown", "gitcommit", "text", "typst" },
     callback = function()
         if vim.bo.filetype ~= "typst" then
-            vim.o.textwidth = 80
-            vim.o.wrap = true
+            vim.opt_local.textwidth = 80
+            vim.opt_local.wrap = true
         end
-        vim.o.spell = true
+        vim.opt_local.spell = true
     end,
     group = augroup("spellcheck-for-text", { clear = true }),
     desc = "Spellcheck for text files",
@@ -67,6 +67,8 @@ autocmd("VimEnter", {
             })
         end, 100)
     end,
+    group = augroup("luasnip_extend", { clear = true }),
+    desc = "Extend luasnip fts with docstrings",
 })
 
 -- Treesitter highlighting
@@ -91,4 +93,6 @@ autocmd("InsertLeave", {
             require("luasnip").unlink_current()
         end
     end,
+    group = augroup("unlink_luasnip", { clear = true }),
+    desc = "Unlinks snippet on insert leave",
 })
