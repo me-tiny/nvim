@@ -45,18 +45,6 @@ vim.diagnostic.config({
     update_in_insert = false,
     severity_sort = true,
     float = { border = "none", source = "if_many" },
-    jump = {
-        on_jump = function(diagnostic, bufnr)
-            if not diagnostic then
-                return
-            end
-            vim.diagnostic.open_float({
-                bufnr = bufnr,
-                scope = "cursor",
-                focus = false,
-            })
-        end,
-    },
     signs = {
         text = {
             [vim.diagnostic.severity.ERROR] = "",
