@@ -35,11 +35,6 @@ return {
                         "$FILENAME",
                     },
                 },
-                clang_format = {
-                    append_args = {
-                        "--style={BasedOnStyle: LLVM, IndentWidth: 4, TabWidth: 4, UseTab: Never, BreakTemplateDeclarations: Yes}",
-                    },
-                },
             },
         },
     },
