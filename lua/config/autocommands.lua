@@ -3,7 +3,7 @@ local augroup = vim.api.nvim_create_augroup
 
 autocmd("TextYankPost", {
     callback = function()
-        vim.hl.on_yank({ timeout = 200 })
+        vim.hl.hl_op({ higroup = "CurSearch", timeout = 200 })
     end,
     group = augroup("highlight-on-yank", { clear = true }),
     desc = "Highlight when yanking text",
