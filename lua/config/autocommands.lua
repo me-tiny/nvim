@@ -62,7 +62,7 @@ autocmd("VimEnter", {
             ls.filetype_extend("c", { "cdoc" })
             require("luasnip.loaders.from_vscode").lazy_load({
                 paths = {
-                    vim.fn.stdpath("data") .. "/lazy/friendly-snippets",
+                    vim.fs.joinpath(vim.fn.stdpath("data"), "site", "pack", "core", "opt", "friendly-snippets"),
                 },
             })
         end, 100)
