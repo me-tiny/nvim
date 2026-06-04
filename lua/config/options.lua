@@ -40,6 +40,13 @@ vim.o.conceallevel = 2
 vim.o.winborder = "none"
 vim.o.foldlevelstart = 99
 
+vim.opt.path:append("**")
+vim.o.wildmenu = true
+vim.o.wildmode = "longest:full,full"
+vim.o.wildoptions = "fuzzy,pum"
+vim.o.grepprg = "rg --vimgrep --smart-case"
+vim.o.grepformat = "%f:%l:%c:%m"
+
 -- diagnostic setup
 vim.diagnostic.config({
     update_in_insert = false,
