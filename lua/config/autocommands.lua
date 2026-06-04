@@ -51,25 +51,25 @@ autocmd({ "VimResized" }, {
 })
 
 -- Defer friendly-snippets loading and filetype_extend
-autocmd("VimEnter", {
-    callback = function()
-        vim.defer_fn(function()
-            local ls = require("luasnip")
-            ls.filetype_extend("python", { "pydoc" })
-            ls.filetype_extend("lua", { "luadoc" })
-            ls.filetype_extend("rust", { "rustdoc" })
-            ls.filetype_extend("cpp", { "cppdoc" })
-            ls.filetype_extend("c", { "cdoc" })
-            require("luasnip.loaders.from_vscode").lazy_load({
-                paths = {
-                    vim.fs.joinpath(vim.fn.stdpath("data"), "site", "pack", "core", "opt", "friendly-snippets"),
-                },
-            })
-        end, 100)
-    end,
-    group = augroup("luasnip_extend", { clear = true }),
-    desc = "Extend luasnip fts with docstrings",
-})
+-- autocmd("VimEnter", {
+--     callback = function()
+--         vim.defer_fn(function()
+--             local ls = require("luasnip")
+--             ls.filetype_extend("python", { "pydoc" })
+--             ls.filetype_extend("lua", { "luadoc" })
+--             ls.filetype_extend("rust", { "rustdoc" })
+--             ls.filetype_extend("cpp", { "cppdoc" })
+--             ls.filetype_extend("c", { "cdoc" })
+--             require("luasnip.loaders.from_vscode").lazy_load({
+--                 paths = {
+--                     vim.fs.joinpath(vim.fn.stdpath("data"), "site", "pack", "core", "opt", "friendly-snippets"),
+--                 },
+--             })
+--         end, 100)
+--     end,
+--     group = augroup("luasnip_extend", { clear = true }),
+--     desc = "Extend luasnip fts with docstrings",
+-- })
 
 -- Treesitter highlighting
 -- autocmd("FileType", {
@@ -84,15 +84,15 @@ autocmd("VimEnter", {
 -- })
 
 -- Luasnip unlink snippet
-autocmd("InsertLeave", {
-    callback = function()
-        if
-            require("luasnip").session.current_nodes[vim.api.nvim_get_current_buf()]
-            and not require("luasnip").session.jump_active
-        then
-            require("luasnip").unlink_current()
-        end
-    end,
-    group = augroup("unlink_luasnip", { clear = true }),
-    desc = "Unlinks snippet on insert leave",
-})
+-- autocmd("InsertLeave", {
+--     callback = function()
+--         if
+--             require("luasnip").session.current_nodes[vim.api.nvim_get_current_buf()]
+--             and not require("luasnip").session.jump_active
+--         then
+--             require("luasnip").unlink_current()
+--         end
+--     end,
+--     group = augroup("unlink_luasnip", { clear = true }),
+--     desc = "Unlinks snippet on insert leave",
+-- })
