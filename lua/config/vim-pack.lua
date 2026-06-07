@@ -90,4 +90,18 @@ function M.on_plugin_update(plugin_name, cmd)
     })
 end
 
+--- Helper function to defer adding and configuring plugins to VimEnter
+---
+---@param plugins PluginSpec[]
+function M.add_on_vimenter(plugins)
+    vim.api.nvim_create_autocmd("VimEnter", {
+        once = true,
+        callback = function()
+            vim.schedule(function()
+                configure(plugins)
+            end)
+        end,
+    })
+end
+
 return M
