@@ -79,16 +79,16 @@ autocmd("QuickFixCmdPost", {
 -- })
 
 -- Treesitter highlighting
--- autocmd("FileType", {
---     pattern = "*",
---     callback = function()
---         pcall(function()
---             vim.treesitter.start()
---         end)
---     end,
---     group = augroup("treesitter-highlighting", { clear = true }),
---     desc = "Try enable tree-sitter highlighting",
--- })
+autocmd("FileType", {
+    pattern = "*",
+    callback = function(args)
+        local bufnr = args.buf
+
+        pcall(vim.treesitter.start, bufnr)
+    end,
+    group = augroup("treesitter-highlighting", { clear = true }),
+    desc = "Try enable tree-sitter highlighting",
+})
 
 -- Luasnip unlink snippet
 -- autocmd("InsertLeave", {
