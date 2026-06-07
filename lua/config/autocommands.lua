@@ -50,6 +50,13 @@ autocmd({ "VimResized" }, {
     desc = "Resize splits if window is resized",
 })
 
+autocmd("QuickFixCmdPost", {
+    pattern = { "grep", "grepadd", "lgrep" },
+    command = "botright cwindow",
+    group = augroup("grep-quickfix", { clear = true }),
+    desc = "Open quickfix after :grep",
+})
+
 -- Defer friendly-snippets loading and filetype_extend
 -- autocmd("VimEnter", {
 --     callback = function()
