@@ -1,6 +1,6 @@
 local pack = require("config.vim-pack")
 
-pack.add({
+pack.add_on_vimenter({
     {
         src = "nvim-mini/mini.icons",
         opts = {
