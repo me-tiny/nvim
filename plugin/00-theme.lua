@@ -10,7 +10,7 @@ pack.add({
                 transparent = false,
                 solid = true,
             },
-            intergrations = {
+            integrations = {
                 -- diffview = true,
                 -- snacks = {
                 --     enabled = true,
