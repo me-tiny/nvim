@@ -44,7 +44,8 @@ vim.opt.path:append("**")
 vim.o.wildmenu = true
 vim.o.wildmode = "longest:full,full"
 vim.o.wildoptions = "fuzzy,pum"
-vim.o.grepprg = "rg --vimgrep --smart-case"
+vim.o.wildignorecase = true
+vim.o.grepprg = "rg --vimgrep --smart-case --hidden --glob=!.git"
 vim.o.grepformat = "%f:%l:%c:%m"
 
 -- diagnostic setup
