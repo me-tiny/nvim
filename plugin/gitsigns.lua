@@ -1,14 +1,19 @@
 local pack = require("config.vim-pack")
 local group = vim.api.nvim_create_augroup("gitsigns-lazy-load", { clear = true })
+local loaded = false
 
 vim.api.nvim_create_autocmd("BufRead", {
     group = group,
     callback = function()
+        if loaded then
+            return
+        end
         vim.fn.jobstart({ "git", "-C", vim.uv.cwd(), "rev-parse" }, {
             on_exit = function(_, return_code)
-                if return_code ~= 0 then
+                if return_code ~= 0 or loaded then
                     return
                 end
+                loaded = true
                 vim.api.nvim_del_augroup_by_name("gitsigns-lazy-load")
                 vim.schedule(function()
                     pack.add({
