@@ -47,7 +47,13 @@ function M.findfunc(cmdarg, cmdcomplete)
     if cmdarg == "" then
         return vim.list_slice(e.files, 1, LIMIT)
     end
-    return vim.fn.matchfuzzy(e.files, cmdarg, { limit = cmdcomplete and LIMIT or 1 })
+
+    local matches = vim.fn.matchfuzzy(e.files, cmdarg)
+    if cmdcomplete then
+        return vim.list_slice(matches, 1, LIMIT)
+    end
+
+    return matches[1] and { matches[1] } or {}
 end
 
 function M.setup()
