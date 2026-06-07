@@ -47,6 +47,8 @@ vim.o.wildoptions = "fuzzy,pum"
 vim.o.wildignorecase = true
 vim.o.grepprg = "rg --vimgrep --smart-case --hidden --glob=!.git"
 vim.o.grepformat = "%f:%l:%c:%m"
+vim.cmd.cnoreabbrev("<expr> grep (getcmdtype() == ':' && getcmdline() ==# 'grep') ? 'Grep' : 'grep'")
+require("util.find").setup()
 
 -- diagnostic setup
 vim.diagnostic.config({
