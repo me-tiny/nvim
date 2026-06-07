@@ -1,8 +1,8 @@
 local pack = require("config.vim-pack")
 
-pack.add({
+pack.add_on_event({ "BufReadPre", "BufNewFile" }, {
     {
         src = "kylechui/nvim-surround",
-        setup = false,
+        opts = {},
     },
 })
