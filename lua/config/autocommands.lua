@@ -87,13 +87,12 @@ vim.api.nvim_create_autocmd({ "BufReadPre", "BufNewFile" }, {
 --     desc = "Extend luasnip fts with docstrings",
 -- })
 
--- Treesitter highlighting
 autocmd("FileType", {
     pattern = "*",
     callback = function(args)
-        local bufnr = args.buf
-
-        pcall(vim.treesitter.start, bufnr)
+        vim.schedule(function()
+            pcall(vim.treesitter.start, args.buf)
+        end)
     end,
     group = augroup("treesitter-highlighting", { clear = true }),
     desc = "Try enable tree-sitter highlighting",
