@@ -57,6 +57,15 @@ autocmd("QuickFixCmdPost", {
     desc = "Open quickfix after :grep",
 })
 
+vim.api.nvim_create_autocmd({ "BufReadPre", "BufNewFile" }, {
+    once = true,
+    callback = function()
+        require("config/lsp")
+    end,
+    group = augroup("defer-lsp-load", { clear = true }),
+    desc = "Defer load LSP config",
+})
+
 -- Defer friendly-snippets loading and filetype_extend
 -- autocmd("VimEnter", {
 --     callback = function()
