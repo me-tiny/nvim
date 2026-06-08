@@ -45,13 +45,11 @@ pack.add_on_event({ "BufReadPre", "BufNewFile" }, {
             if init then
                 vim.opt.runtimepath:prepend(vim.fn.fnamemodify(init, ":h:h:h") .. "/runtime")
             end
-
-            require("nvim-treesitter").install(parsers):wait(300000)
         end,
     },
 })
 
 pack.on_plugin_update("nvim-treesitter", function()
     require("nvim-treesitter").install(parsers):wait(300000)
-    require("nvim-treesitter").update():wait(300000)
+    require("nvim-treesitter").update()
 end)
