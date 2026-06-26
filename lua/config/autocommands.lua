@@ -9,6 +9,14 @@ autocmd("TextYankPost", {
     desc = "Highlight when yanking text",
 })
 
+autocmd("TextPutPost", {
+    callback = function()
+        vim.hl.hl_op({ higroup = "IncSearch", timeout = 200 })
+    end,
+    group = augroup("highlight-on-put", { clear = true }),
+    desc = "Highlight when putting text",
+})
+
 autocmd("FileType", {
     callback = function()
         vim.opt_local.formatoptions:remove({ "c", "r", "o" })

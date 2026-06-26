@@ -2,7 +2,7 @@ local pack = require("config.vim-pack")
 local group = vim.api.nvim_create_augroup("gitsigns-lazy-load", { clear = true })
 local loaded = false
 
-vim.api.nvim_create_autocmd("BufRead", {
+vim.api.nvim_create_autocmd({ "BufReadPre", "BufNewFile" }, {
     group = group,
     callback = function()
         if loaded then
