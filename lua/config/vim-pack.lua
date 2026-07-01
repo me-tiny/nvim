@@ -8,6 +8,7 @@ local M = {}
 ---@field opts? table|fun():table Optional configuration options for the plugin
 ---@field on_setup? fun():nil Optional function to run after the plugin is loaded and configured
 ---@field setup? false Set to false to skip require/setup entirely (for vimscript-only or data-only plugins)
+---@field build? fun():nil Optional function to run after download but before setup
 
 ---@param plugins PluginSpec[]
 local function configure(plugins)
@@ -22,6 +23,9 @@ local function configure(plugins)
     vim.pack.add(sources)
 
     for _, plugin in ipairs(plugins) do
+        if plugin.build then
+            plugin.build()
+        end
         if plugin.setup ~= false then
             local module_name = plugin.module_name or (plugin.src:match(".+/(.+)"):gsub("%.nvim$", ""))
             local mod = require(module_name)
@@ -86,20 +90,6 @@ function M.on_plugin_update(plugin_name, cmd)
                     cmd()
                 end
             end
-        end,
-    })
-end
-
---- Helper function to defer adding and configuring plugins to VimEnter
----
----@param plugins PluginSpec[]
-function M.add_on_vimenter(plugins)
-    vim.api.nvim_create_autocmd("VimEnter", {
-        once = true,
-        callback = function()
-            vim.schedule(function()
-                configure(plugins)
-            end)
         end,
     })
 end

@@ -4,7 +4,7 @@ if not os.getenv("TMUX") then
     return
 end
 
-pack.add_on_vimenter({
+pack.add_on_event("VimEnter", {
     {
         src = "alexghergh/nvim-tmux-navigation",
         module_name = "nvim-tmux-navigation",
