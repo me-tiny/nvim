@@ -11,11 +11,11 @@ pack.add_on_event("InsertEnter", {
         opts = {},
         on_setup = function()
             local ls = require("luasnip")
-            ls.filetype_extend("python", { "pydoc" })
-            ls.filetype_extend("lua", { "luadoc" })
-            ls.filetype_extend("rust", { "rustdoc" })
-            ls.filetype_extend("cpp", { "cppdoc" })
             ls.filetype_extend("c", { "cdoc" })
+            ls.filetype_extend("cpp", { "cppdoc" })
+            ls.filetype_extend("lua", { "luadoc" })
+            ls.filetype_extend("python", { "pydoc" })
+            ls.filetype_extend("rust", { "rustdoc" })
             require("luasnip.loaders.from_vscode").lazy_load()
         end,
     },
