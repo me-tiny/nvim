@@ -123,7 +123,6 @@ pack.add_on_event("InsertEnter", {
     },
 })
 
-pack.on_plugin_update("LuaSnip", function()
-    local path = vim.fs.joinpath(vim.fn.stdpath("data"), "site", "pack", "core", "opt", "LuaSnip")
+pack.on_plugin_update("LuaSnip", function(path)
     vim.system({ "make", "install_jsregexp" }, { cwd = path }):wait()
 end)

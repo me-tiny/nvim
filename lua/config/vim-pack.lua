@@ -82,15 +82,15 @@ end
 --- Runs the given command inside the plugin's directory when the plugin is updated.
 ---
 ---@param plugin_name string Plugin name
----@param cmd string|fun():nil Command to run
+---@param cmd string[]|fun(path: string):nil Argv list to run in the plugins's dir, or a function receiving the plugins's path
 function M.on_plugin_update(plugin_name, cmd)
     vim.api.nvim_create_autocmd("PackChanged", {
         callback = function(args)
             if args.data.spec.name == plugin_name and (args.data.kind == "install" or args.data.kind == "update") then
-                if type(cmd) == "string" then
-                    vim.system({ cmd }, { cwd = args.data.path })
+                if type(cmd) == "function" then
+                    cmd(args.data.path)
                 else
-                    cmd()
+                    vim.system(cmd, { cwd = args.data.path })
                 end
             end
         end,
