@@ -4,7 +4,7 @@ local function map(keys, func, opts, mode)
     vim.keymap.set(mode, keys, func, opts)
 end
 
-map("<Esc>", "<Cmd>nohl<CR>")
+map("<Esc>", "<CMD>nohl|dif<CR>")
 
 map("<Leader>q", "<CMD>copen<CR>", "Quickfix open")
 map("<Leader>Q", "<CMD>cclose<CR>", "Quickfix close")
@@ -14,15 +14,15 @@ map("<Down>", "j", { noremap = true, silent = true })
 map("<Up>", "k", { noremap = true, silent = true })
 map("<Right>", "l", { noremap = true, silent = true })
 
-map("<C-h>", "<C-w><C-h>", "Move focus to the left window")
-map("<C-j>", "<C-w><C-j>", "Move focus to the lower window")
-map("<C-k>", "<C-w><C-k>", "Move focus to the upper window")
-map("<C-l>", "<C-w><C-l>", "Move focus to the right window")
+map("<C-h>", "<C-w><C-h>", "Focus left", { "n", "v" })
+map("<C-j>", "<C-w><C-j>", "Focus down", { "n", "v" })
+map("<C-k>", "<C-w><C-k>", "Focus up", { "n", "v" })
+map("<C-l>", "<C-w><C-l>", "Focus right", { "n", "v" })
 
-map("n", "<C-Left>", "<C-h>", { noremap = false, silent = true })
-map("n", "<C-Down>", "<C-j>", { noremap = false, silent = true })
-map("n", "<C-Up>", "<C-k>", { noremap = false, silent = true })
-map("n", "<C-Right>", "<C-l>", { noremap = false, silent = true })
+map("<C-Left>", "<C-h>", { remap = true, silent = true }, { "n", "v" })
+map("<C-Down>", "<C-j>", { remap = true, silent = true }, { "n", "v" })
+map("<C-Up>", "<C-k>", { remap = true, silent = true }, { "n", "v" })
+map("<C-Right>", "<C-l>", { remap = true, silent = true }, { "n", "v" })
 
 map("<Leader>fm", function()
     require("conform").format({ async = true, lsp_format = "fallback" })
