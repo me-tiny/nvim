@@ -1,6 +1,5 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
-vim.g.have_nerd_font = true
 vim.g.markdown_recommended_style = 0
 
 vim.o.number = true
@@ -40,8 +39,6 @@ vim.o.conceallevel = 2
 vim.o.winborder = "none"
 vim.o.foldlevelstart = 99
 
-vim.opt.path:append("**")
-vim.o.wildmenu = true
 vim.o.wildmode = "longest:full,full"
 vim.o.wildoptions = "fuzzy,pum"
 vim.o.wildignorecase = true
