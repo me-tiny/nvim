@@ -50,21 +50,13 @@ pack.add({
             },
         },
         on_setup = function()
-            local obsidian = require("obsidian")
-
-            vim.keymap.set(
-                "n",
-                "<CR>",
-                obsidian.api.smart_action,
-                { expr = true, buffer = true, desc = "Obsidian smart action" }
-            )
-            vim.keymap.set("n", "<Leader>oo", "<cmd>Obsidian open<CR>", { desc = "Open in Obsidian " })
-            vim.keymap.set("n", "<Leader>ob", "<cmd>Obsidian backlinks<CR>", { desc = "Backlinks" })
-            vim.keymap.set("n", "<Leader>ol", "<cmd>Obsidian links<CR>", { desc = "Links" })
-            vim.keymap.set("n", "<Leader>on", "<cmd>Obsidian new<CR>", { desc = "Create note" })
-            vim.keymap.set("n", "<Leader>os", "<cmd>Obsidian search<CR>", { desc = "Search" })
-            vim.keymap.set("n", "<Leader>oq", "<cmd>Obsidian quick_switch<CR>", { desc = "Quick switch" })
-            vim.keymap.set("n", "<Leader>op", "<cmd>Obsidian paste_img<CR>", { desc = "Paste image" })
+            vim.keymap.set("n", "<Leader>oo", "<CMD>Obsidian open<CR>", { desc = "Open in Obsidian " })
+            vim.keymap.set("n", "<Leader>ob", "<CMD>Obsidian backlinks<CR>", { desc = "Backlinks" })
+            vim.keymap.set("n", "<Leader>ol", "<CMD>Obsidian links<CR>", { desc = "Links" })
+            vim.keymap.set("n", "<Leader>on", "<CMD>Obsidian new<CR>", { desc = "Create note" })
+            vim.keymap.set("n", "<Leader>os", "<CMD>Obsidian search<CR>", { desc = "Search" })
+            vim.keymap.set("n", "<Leader>oq", "<CMD>Obsidian quick_switch<CR>", { desc = "Quick switch" })
+            vim.keymap.set("n", "<Leader>op", "<CMD>Obsidian paste_img<CR>", { desc = "Paste image" })
             vim.keymap.set(
                 "n",
                 "<Leader>ok",
@@ -72,19 +64,6 @@ pack.add({
                 { desc = "Move to uncategorised", silent = true }
             )
             vim.keymap.set("n", "<Leader>odd", ":!rm '%:p'<CR>:bd<CR>", { desc = "Delete file", silent = true })
-
-            -- -- Obsidian specific live grep folders
-            -- local inbox = vault_path .. "/inbox"
-            -- local notes = vault_path .. "/notes"
-            -- local uncat = vault_path .. "/uncategorised"
-            --
-            -- vim.keymap.set("n", "<Leader>fg", function()
-            --     Snacks.picker.grep({ dirs = { inbox, notes, uncat }, title = "Vault (Grep)" })
-            -- end, { desc = "Grep (Obsidian)", noremap = true })
-            --
-            -- vim.keymap.set("n", "<Leader>ff", function()
-            --     Snacks.picker.files({ dirs = { inbox, notes, uncat }, title = "Vault" })
-            -- end, { desc = "Find Files (Obsidian)", noremap = true })
         end,
     },
 })
