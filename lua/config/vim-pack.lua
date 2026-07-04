@@ -8,7 +8,7 @@ local M = {}
 ---@field opts? table|fun():table Optional configuration options for the plugin
 ---@field on_setup? fun():nil Optional function to run after the plugin is loaded and configured
 ---@field setup? false Set to false to skip require/setup entirely (for vimscript-only or data-only plugins)
----@field build? fun():nil Optional function to run after download but before setup
+---@field build? fun():nil Optional function to run on every load, before setup
 
 ---@param plugins PluginSpec[]
 local function configure(plugins)
