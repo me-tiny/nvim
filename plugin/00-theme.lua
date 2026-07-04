@@ -10,12 +10,6 @@ pack.add({
                 transparent = false,
                 solid = true,
             },
-            integrations = {
-                -- diffview = true,
-                -- snacks = {
-                --     enabled = true,
-                -- },
-            },
             lsp_styles = {
                 enabled = true,
                 underlines = {
