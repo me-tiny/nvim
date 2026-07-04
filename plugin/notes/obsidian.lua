@@ -6,7 +6,7 @@ if not string.find(cwd, vault_path, 1, true) then
     return
 end
 
-pack.add({
+pack.add_on_file_type("markdown", {
     {
         src = "obsidian-nvim/obsidian.nvim",
         version = vim.version.range("*"),
