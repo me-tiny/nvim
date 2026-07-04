@@ -59,7 +59,9 @@ return {
     },
     filetypes = {
         "c",
+        "c.doxygen",
         "cpp",
+        "cpp.doxygen",
     },
     root_markers = {
         ".clangd",
