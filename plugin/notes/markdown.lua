@@ -1,6 +1,6 @@
 local pack = require("config.vim-pack")
 
-pack.add_on_file_type({ "markdown", "gitcommit" }, {
+pack.add_on_file_type("markdown", {
     {
         src = "MeanderingProgrammer/render-markdown.nvim",
         module_name = "render-markdown",
