@@ -13,10 +13,7 @@ pack.add_on_event("VimEnter", {
         },
         on_setup = function()
             local tmn = require("nvim-tmux-navigation")
-            vim.keymap.del({ "n", "v" }, "<C-h>")
-            vim.keymap.del({ "n", "v" }, "<C-j>")
-            vim.keymap.del({ "n", "v" }, "<C-k>")
-            vim.keymap.del({ "n", "v" }, "<C-l>")
+
             vim.keymap.set({ "n", "v" }, "<C-h>", tmn.NvimTmuxNavigateLeft, { desc = "Focus left" })
             vim.keymap.set({ "n", "v" }, "<C-j>", tmn.NvimTmuxNavigateDown, { desc = "Focus down" })
             vim.keymap.set({ "n", "v" }, "<C-k>", tmn.NvimTmuxNavigateUp, { desc = "Focus up" })
