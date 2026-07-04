@@ -1,7 +1,7 @@
 local pack = require("config.vim-pack")
 local loaded = false
 
-vim.keymap.set("", "<Leader>e", function()
+vim.keymap.set("n", "<Leader>e", function()
     if not loaded then
         pack.add({
             {
