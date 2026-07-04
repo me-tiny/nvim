@@ -77,9 +77,7 @@ vim.api.nvim_create_autocmd({ "BufReadPre", "BufNewFile" }, {
 autocmd("FileType", {
     pattern = "*",
     callback = function(args)
-        vim.schedule(function()
-            pcall(vim.treesitter.start, args.buf)
-        end)
+        pcall(vim.treesitter.start, args.buf)
     end,
     group = augroup("treesitter-highlighting", { clear = true }),
     desc = "Try enable tree-sitter highlighting",
