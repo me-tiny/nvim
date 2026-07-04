@@ -47,8 +47,11 @@ local add_on_event = function(event, pattern, plugins)
     vim.api.nvim_create_autocmd(event, {
         pattern = pattern,
         once = true,
-        callback = function()
+        callback = function(args)
             configure(plugins)
+            if event == "FileType" then
+                vim.api.nvim_exec_autocmds("FileType", { buffer = args.buf, modeline = false })
+            end
         end,
     })
 end
