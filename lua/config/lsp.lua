@@ -21,17 +21,6 @@ local function on_attach(client, bufnr)
         vim.keymap.set(mode or "n", keys, func, { buffer = bufnr, desc = desc })
     end
 
-    -- map("grr", Snacks.picker.lsp_references, "References")
-    -- map("gri", Snacks.picker.lsp_implementations, "Implementations")
-    -- map("grd", Snacks.picker.lsp_definitions, "Definitions")
-    -- map("grD", Snacks.picker.lsp_declarations, "Declarations")
-    -- map("gO", Snacks.picker.lsp_symbols, "Document Symbols")
-    -- map("gW", Snacks.picker.lsp_workspace_symbols, "Workspace Symbols")
-    -- map("grt", Snacks.picker.lsp_type_definitions, "Type Definitions")
-    -- map("grn", vim.lsp.buf.rename, "Rename")
-    -- map("gra", vim.lsp.buf.code_action, "Code Action")
-    -- map("grx", vim.lsp.codelens.run, "Codelens Run")
-
     if client:supports_method("textDocument/documentHighlight") then
         local group = vim.api.nvim_create_augroup(("lsp-highlight-%d-%d"):format(client.id, bufnr), { clear = true })
 
