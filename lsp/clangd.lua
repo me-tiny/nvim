@@ -55,7 +55,6 @@ return {
         "--header-insertion=iwyu",
         "--completion-style=detailed",
         "--function-arg-placeholders=0",
-        "--fallback-style={BasedOnStyle: LLVM, IndentWidth: 4, TabWidth: 4, UseTab: Never, AllowShortFunctionsOnASingleLine: None, BreakTemplateDeclarations: Yes}",
     },
     filetypes = {
         "c",
