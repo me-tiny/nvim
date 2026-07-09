@@ -113,7 +113,7 @@ pack.add_on_event("InsertEnter", {
                 ["<C-y>"] = { "select_and_accept", "fallback" },
                 ["<Tab>"] = { "snippet_forward", "fallback" },
                 ["<S-Tab>"] = { "snippet_backward", "fallback" },
-                ["<C-k>"] = { "show_signature", "hide_signature", "fallback" },
+                ["<C-s>"] = { "show_signature", "hide_signature", "fallback" },
                 ["<C-Space>"] = { "show", "show_documentation", "hide_documentation" },
             },
             fuzzy = {
