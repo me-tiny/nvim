@@ -5,12 +5,10 @@ pack.add_on_event({ "BufReadPre", "BufNewFile" }, {
         src = "stevearc/conform.nvim",
         opts = {
             notify_on_error = true,
-            format_on_save = function()
-                return {
-                    timeout_ms = 500,
-                    lsp_format = "fallback",
-                }
-            end,
+            format_on_save = {
+                timeout_ms = 500,
+                lsp_format = "fallback",
+            },
             formatters_by_ft = {
                 css = { "prettierd" },
                 go = { "gofmt" },
